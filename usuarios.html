@@ -1,0 +1,48 @@
+/**
+ * lab 3 Ingenieria de sofware
+ * Usuario y control de usuario
+ * 
+ * @outor Garcia Vallejos Jose Armando
+ * @Version 1.0
+ * @Date 2024/03/08
+ * @lenguaje JavaScrip
+ */
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <div id="userList"></div>
+
+    <script>
+        // Hacer la solicitud GET al archivo usuarios.json
+        fetch('usuarios.json')
+            .then(response => response.json()) // Convertir la respuesta a JSON
+            .then(data => {
+                // Procesar los datos recibidos
+                const userListDiv = document.getElementById('userList');
+                // Limpiar cualquier contenido previo
+                userListDiv.innerHTML = '';
+
+                // Crear elementos HTML para cada usuario y agregarlos al contenedor
+                data.forEach(user => {
+                    const userDiv = document.createElement('div');
+                    userDiv.innerHTML = `
+                        <h3>${user.nombre}</h3>
+                        <p>Email: ${user.email}</p>
+                    `;
+                    userListDiv.appendChild(userDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Hubo un error al obtener la lista de usuarios:', error);
+            });
+    </script>
+</body>
+</html>
